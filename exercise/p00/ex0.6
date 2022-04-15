@@ -1,0 +1,25 @@
+note over browser:
+user writes "something" into the text field
+and clicks Save button
+end note
+
+note over browser:
+browser updates notes and 
+and rerenders notes  
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+note over browser:
+request payload:
+{
+  "content": "ccl2",
+  "date": "2022-04-15T14:25:26.978Z"
+}
+end note
+
+note over server:
+user's text is extracted from the req.body.content and .date
+and stored as new note object
+end note
+
+server-->browser: {"message":"note created"} (Status Code 201 (OK))
