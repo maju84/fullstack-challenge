@@ -1,30 +1,37 @@
 import { useState } from 'react'
 
-const Display = ({ counter }) => <div>{counter}</div>
-
-const Button = ({ onClick, text }) => (
-    <button onClick={ onClick }>
-      {text}
-    </button>
-  )
-
-
-
 const App = () => {
-  // useState hook to create and init app state 
-  const [ counter, setCounter ] = useState(0)
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
 
-  // event handler methods
-  const incrementCounter = () => setCounter(counter + 1)
-  const decreaseCounter = () => setCounter(counter -1)
-  const resetCounter = () => setCounter(0)
+  const handleLeftClick = () => {
+    
+    // in React state change must be done by setting a new object and nothing else!
+
+    setClicks({   // all of clicks, then left is overwritten
+      ...clicks,
+      left: clicks.left + 1
+    })
+  }
+
+  const handleRightClick = () => {
+    setClicks( { 
+      ...clicks,
+      right: clicks.right + 1 
+    })
+  }
 
   return (
     <div>
-      <Display counter={counter}/>
-      <Button onClick={ incrementCounter } text='+1'/>
-      <Button onClick={ decreaseCounter } text='-1'/>
-      <Button onClick={ resetCounter } text=' 0 '/>     
+      {clicks.left}
+      <button onClick={ handleLeftClick }>
+        left
+      </button>
+      <button onClick={ handleRightClick }>
+        right
+      </button>
+      {clicks.right}
     </div>
   )
 }
