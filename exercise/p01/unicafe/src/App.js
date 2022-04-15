@@ -28,7 +28,7 @@ const Statistics = ({ good, neutral, bad }) => {
       <Display text='positive' value={good*100 / all } unit='%' />
       </> 
 
-      : null
+      : <p>No feedback gathered.</p>
     }
     </>
   )
