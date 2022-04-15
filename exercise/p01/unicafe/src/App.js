@@ -7,8 +7,11 @@ const Button = ({ handleClick, text }) => (
 )
 
 const StatisticLine  = ({ text, value, unit='' }) => 
-  <div>{text}: {value} {unit}</div> 
-
+  <tr>
+    <td>{text}:</td>
+    <td>{value} {unit}</td>
+  </tr>
+  
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good+neutral+bad;
@@ -20,14 +23,17 @@ const Statistics = ({ good, neutral, bad }) => {
     { all 
       ? 
       <>
-      <StatisticLine text='good' value={good} />
-      <StatisticLine text='neutral' value={neutral} />
-      <StatisticLine text='bad' value={bad} />
-      <StatisticLine text='all' value={all} />
-      <StatisticLine text='average' value={average} />
-      <StatisticLine text='positive' value={good*100 / all } unit='%' />
+       <table>
+        <tbody>
+        <StatisticLine text='good' value={good} />
+        <StatisticLine text='neutral' value={neutral} />
+        <StatisticLine text='bad' value={bad} />
+        <StatisticLine text='all' value={all} />
+        <StatisticLine text='average' value={average} />
+        <StatisticLine text='positive' value={good*100 / all } unit='%' />
+        </tbody>
+      </table>      
       </> 
-
       : <p>No feedback gathered.</p>
     }
     </>
