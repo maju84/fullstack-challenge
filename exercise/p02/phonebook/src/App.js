@@ -3,19 +3,31 @@ import Person from './components/Person'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', id: 1 }
+    { id: 1,
+      name: 'Arto Hellas', 
+      number: '123-42',
+    }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  
 
   const addPerson = (event) => {    
     event.preventDefault()
     
-    const personObject = {
-      name: newName.trim(),
+    const personObject = {      
       id: persons.length + 1,
+      name: newName.trim(),
+      number: newNumber.trim(),
     }
 
-    if ( isNameAlreadyInPhonebook(newName) ) {
+    if ( !isPersonValid({ person: personObject }) ) {
+      window.alert('invalid person');
+      return;
+    }
+    
+
+    if ( isNameAlreadyInPhonebook({name: newName}) ) {
         window.alert(`${newName} is already added to phonebook`);
         return;
     }      
@@ -29,10 +41,19 @@ const App = () => {
       p.name.toLowerCase() === name.trim().toLowerCase())
       .length > 0
   }
+
+  const isPersonValid = ({ person }) => {
+    return person.name && person.number;
+  }
  
 
-  const handlePersonChange = (event) => {  
+  const handleNameChange = (event) => {  
+    console.log(event.target.value);
     setNewName(event.target.value)  
+  }
+
+  const handleNumberChange = (event) => {  
+    setNewNumber(event.target.value)  
   }
 
   return (
@@ -42,7 +63,13 @@ const App = () => {
         <div>
           name: <input 
             value={newName}
-            onChange={handlePersonChange}
+            onChange={handleNameChange}
+          />
+        </div>
+        <div>
+          number: <input 
+            value={newNumber}
+            onChange={handleNumberChange}
           />
         </div>
         <div>
