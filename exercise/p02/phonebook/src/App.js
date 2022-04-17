@@ -39,7 +39,6 @@ const App = () => {
       <SearchFilter 
         searchString={newSearchString}
         searchStringChangeHandler={handleSearchStringChange}
-        persons={persons}
       />
 
       <h3>add new</h3>

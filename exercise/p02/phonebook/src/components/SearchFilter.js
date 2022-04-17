@@ -11,7 +11,7 @@ const filterPersons = ({ searchString, persons }) => {
 }
 
 
-const SearchFilter = ({ searchString, searchStringChangeHandler, persons }) => {
+const SearchFilter = ({ searchString, searchStringChangeHandler }) => {
 
   return (
     <div>
