@@ -11,15 +11,26 @@ const App = () => {
     event.preventDefault()
     
     const personObject = {
-      name: newName,
+      name: newName.trim(),
       id: persons.length + 1,
     }
+
+    if ( isNameAlreadyInPhonebook(newName) ) {
+        window.alert(`${newName} is already added to phonebook`);
+        return;
+    }      
 
     setPersons(persons.concat(personObject))
     setNewName('')
   }
 
-  
+  const isNameAlreadyInPhonebook = ({ name }) => {
+    return persons.filter( p => 
+      p.name.toLowerCase() === name.trim().toLowerCase())
+      .length > 0
+  }
+ 
+
   const handlePersonChange = (event) => {  
     setNewName(event.target.value)  
   }
